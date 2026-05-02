@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Kharl Nieto — Infinite Loop Gallery | Smooth Auto Slide</title>
+<title>Kharl Nieto — Infinite Loop Gallery | Modern Portfolio</title>
 
 <!-- Font Awesome 6 (free) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -255,12 +255,15 @@ h3 i { font-size: 20px; }
 .experience {
   grid-column: 2;
   grid-row: 1 / span 2;
-  height: fit-content;
+  height: auto;
+  /* expanded feel: extra inner spacing + content makes it taller */
 }
 .row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--gap-main);
+  /* 👇 bring closer to experience container (reduce top gap) */
+  margin-top: -6px;
 }
 @media (max-width: 780px) {
   .top-grid, .row-2 { grid-template-columns: 1fr; }
@@ -268,9 +271,11 @@ h3 i { font-size: 20px; }
   .profile-header { flex-wrap: wrap; justify-content: center; text-align: center; }
   .title-bar { justify-content: center; }
   .name-section { justify-content: center; }
+  /* on mobile, reset negative margin to avoid overlap */
+  .row-2 { margin-top: 0; }
 }
 
-/* timeline - newest on top */
+/* timeline - newest on top, now with extra items = taller container */
 .timeline {
   position: relative;
   padding-left: 30px;
@@ -352,7 +357,6 @@ h3 i { font-size: 20px; }
   border-radius: 22px;
   padding: 16px 14px;
   transition: 0.2s;
-  cursor: pointer;
 }
 .project-card:hover, .certificate-card:hover {
   transform: translateY(-3px);
@@ -369,12 +373,36 @@ h3 i { font-size: 20px; }
   color: var(--muted);
   line-height: 1.4;
 }
+
+/* ========== UPDATED: VIEW ALL + CERTIFICATE BTN (light/dark mode adaptive) ========== */
+.view-all-link {
+  font-size: 12px;
+  color: var(--text) !important;
+  opacity: 0.75;
+  text-decoration: none;
+  transition: opacity 0.2s, text-decoration 0.2s;
+}
+.view-all-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
 .view-btn {
   display: inline-block;
   margin-top: 14px;
   font-size: 12px;
   font-weight: 600;
-  color: #f97316;
+  color: var(--text) !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  letter-spacing: 0.2px;
+}
+.view-btn:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+#certCyberCard {
+  cursor: pointer;
 }
 
 /* MODAL */
@@ -720,7 +748,7 @@ h3 i { font-size: 20px; }
     <div class="box tech-stack">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <h3><i class="fas fa-layer-group"></i> Tech Stack</h3>
-        <a href="#" style="font-size:12px; opacity:0.7;">View All →</a>
+        <a href="techstack.html" class="view-all-link">View All</a>
       </div>
       <p style="font-weight:600; margin-bottom: 8px;">Frontend</p>
       <div class="tech-badges"><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JS</span><span class="badge">Figma</span><span class="badge">Tailwind</span></div>
@@ -728,6 +756,7 @@ h3 i { font-size: 20px; }
       <div class="tech-badges"><span class="badge">PHP</span><span class="badge">Laravel</span><span class="badge">MySQL</span><span class="badge">Git</span></div>
     </div>
 
+    <!-- EXPERIENCE BOX (EXPANDED HEIGHT + EXTRA TIMELINE ITEM) -->
     <div class="box experience">
       <h3><i class="fas fa-briefcase"></i> Experience</h3>
       <div class="timeline" id="timelineRoot">
@@ -743,14 +772,20 @@ h3 i { font-size: 20px; }
         </div>
         <div class="timeline-item">
           <div class="timeline-circle"></div>
+          <div class="timeline-content"><strong>Full-stack Trainee (Self)</strong><span>Laravel + MySQL projects</span></div>
+          <div class="timeline-year">2025</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-circle"></div>
           <div class="timeline-content"><strong>Programming Foundations</strong><span>Self-learning & mini projects</span></div>
-          <div class="timeline-year">2023</div>
+          <div class="timeline-year">2024</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-circle"></div>
           <div class="timeline-content"><strong>BS Information Technology</strong><span>Univ. of Eastern Pangasinan</span></div>
           <div class="timeline-year">2023</div>
         </div>
+        
         <div class="timeline-item">
           <div class="timeline-circle"></div>
           <div class="timeline-content"><strong>Hello World! 👋</strong><span>First line of code</span></div>
@@ -760,7 +795,7 @@ h3 i { font-size: 20px; }
     </div>
   </div>
 
-  <!-- ROW 2: Certificates + Projects -->
+  <!-- ROW 2: Certificates + Projects (now pulled slightly up for closeness) -->
   <div class="row-2">
     <div class="box">
       <h3><i class="fas fa-certificate"></i> Certificates</h3>
@@ -770,7 +805,7 @@ h3 i { font-size: 20px; }
         <div class="certificate-card" id="certCyberCard">
           <strong>1-Day Cybersecurity Seminar</strong>
           <p>Certificate of Participation</p>
-          <span class="view-btn">📜 Click to View Certificate →</span>
+          <span class="view-btn">Click to View Certificate →</span>
         </div>
       </div>
     </div>
@@ -781,7 +816,10 @@ h3 i { font-size: 20px; }
         <div class="project-card"><strong>E‑commerce Platform</strong><p>Product catalog + cart system</p></div>
         <div class="project-card"><strong>Admin Dashboard</strong><p>Responsive charts & analytics</p></div>
         <div class="project-card"><strong>Portfolio Website</strong><p>Modern personal portfolio</p></div>
-        <div class="project-card"><strong>Blog CMS</strong><p>Custom content management</p></div>
+        <div class="project-card">
+          <strong>Capstone Project: Apartment Tracking System</strong>
+          <p>Web-based system for monitoring and managing apartment records and tenant information</p>
+        </div>
       </div>
     </div>
   </div>
@@ -796,9 +834,9 @@ h3 i { font-size: 20px; }
     </div>
   </div>
 
-  <!-- INFINITE LOOP GALLERY - SMOOTH AUTO SLIDE ULIT ULIT -->
+  <!-- INFINITE LOOP GALLERY -->
   <div class="gallery-container">
-    <h3><i class="fas fa-images"></i> Gallery · Infinite Loop (smooth auto-slide)</h3>
+    <h3><i class="fas fa-images"></i> Gallery</h3>
     <div class="gallery-carousel-wrapper" id="carouselWrapper">
       <div class="gallery-track" id="galleryTrack"></div>
     </div>
@@ -810,7 +848,7 @@ h3 i { font-size: 20px; }
 <!-- MODAL for certificate -->
 <div id="certModal" class="modal">
   <span class="close" id="closeModalBtn">&times;</span>
-  <img class="modal-content" id="certificateModalImg" src="images/certificate-cyber.jpg" alt="Certificate">
+  <img class="modal-content" id="certificateModalImg" src="images/certificate-cyber.jpg" alt="Certificate of Participation">
 </div>
 
 <!-- Chatbot -->
@@ -826,45 +864,38 @@ h3 i { font-size: 20px; }
 
 <script>
   (function() {
-    // ---------- SMOOTH INFINITE CAROUSEL (loops forever without glitch) ----------
+    // ---------- SMOOTH INFINITE CAROUSEL (loops forever) ----------
     const track = document.getElementById('galleryTrack');
     const dotsContainer = document.getElementById('galleryDots');
-    
-    // Original images list (use actual image paths)
     const originalImages = [
       "images/LAST.png",
       "images/PROFILE PIC.png",
       "images/picture6.jpg",
-      "images/hovernight.png",
-      "images/PROFILE PIC.png",
+      "images/2 (3).jpg",
+      "images/2 (2).jpg",
       "images/LAST.png",
-      "images/picture6.jpg"
+      "images/picture6.jpg",
+      "images/2 (1).jpg",
     ];
-    
-    // Create a triple set for infinite effect: [clone_start, original, clone_end]
-    // We'll place original in the middle so we can reset without visual jump
     const cloneLeft = [...originalImages];
     const cloneRight = [...originalImages];
     const infiniteList = [...cloneLeft, ...originalImages, ...cloneRight];
     const totalItems = infiniteList.length;
-    const originalStartIndex = cloneLeft.length;  // first index of real images
+    const originalStartIndex = cloneLeft.length;
     const originalEndIndex = originalStartIndex + originalImages.length - 1;
-    
-    let currentIndex = originalStartIndex;   // start at first real image
+    let currentIndex = originalStartIndex;
     let itemWidth = 160;
     const gap = 16;
     let autoInterval = null;
     let isHovering = false;
     let isTransitioning = false;
     
-    // Helper to get item width dynamically
     function updateDimensions() {
       const sample = document.querySelector('.gallery-item');
       if (sample) itemWidth = sample.offsetWidth;
       else itemWidth = 160;
     }
     
-    // Build track DOM
     function buildTrack() {
       if (!track) return;
       track.innerHTML = '';
@@ -878,17 +909,14 @@ h3 i { font-size: 20px; }
         track.appendChild(div);
       });
       updateDimensions();
-      // set initial position to show first real image
       const initialTranslate = - (currentIndex * (itemWidth + gap));
       track.style.transform = `translateX(${initialTranslate}px)`;
     }
     
-    // Move to a specific index with smooth transition
     function moveToIndex(newIndex, smooth = true) {
       if (isTransitioning && smooth) return;
       if (newIndex < 0) newIndex = 0;
       if (newIndex >= totalItems) newIndex = totalItems - 1;
-      
       const translateVal = - (newIndex * (itemWidth + gap));
       if (smooth) {
         isTransitioning = true;
@@ -897,7 +925,6 @@ h3 i { font-size: 20px; }
         const onFinish = () => {
           isTransitioning = false;
           track.removeEventListener('transitionend', onFinish);
-          // after transition, check if we need to reset position (infinite loop boundary)
           resetIfNeeded();
           updateActiveDot();
         };
@@ -905,7 +932,6 @@ h3 i { font-size: 20px; }
       } else {
         track.style.transition = 'none';
         track.style.transform = `translateX(${translateVal}px)`;
-        // force reflow
         void track.offsetHeight;
         track.style.transition = 'transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         resetIfNeeded();
@@ -915,31 +941,22 @@ h3 i { font-size: 20px; }
       updateActiveDot();
     }
     
-    // Reset position if we are too close to edges to maintain infinite loop
     function resetIfNeeded() {
       if (!track) return;
-      // if we are beyond the cloned region, snap back to corresponding real index within original block
       if (currentIndex < originalStartIndex) {
         const offset = originalStartIndex - currentIndex;
         const newIdx = originalEndIndex - (offset - 1);
-        if (newIdx >= originalStartIndex && newIdx <= originalEndIndex) {
-          jumpSilently(newIdx);
-        } else {
-          jumpSilently(originalStartIndex);
-        }
+        if (newIdx >= originalStartIndex && newIdx <= originalEndIndex) jumpSilently(newIdx);
+        else jumpSilently(originalStartIndex);
       } 
       else if (currentIndex > originalEndIndex) {
         const offset = currentIndex - originalEndIndex;
         const newIdx = originalStartIndex + (offset - 1);
-        if (newIdx >= originalStartIndex && newIdx <= originalEndIndex) {
-          jumpSilently(newIdx);
-        } else {
-          jumpSilently(originalEndIndex);
-        }
+        if (newIdx >= originalStartIndex && newIdx <= originalEndIndex) jumpSilently(newIdx);
+        else jumpSilently(originalEndIndex);
       }
     }
     
-    // Jump without transition (silent reset)
     function jumpSilently(targetIndex) {
       if (!track) return;
       track.style.transition = 'none';
@@ -951,56 +968,33 @@ h3 i { font-size: 20px; }
       updateActiveDot();
     }
     
-    // Move to next slide (smooth)
     function nextSlide() {
       if (isTransitioning) return;
       let nextIdx = currentIndex + 1;
       if (nextIdx >= totalItems) {
-        // seamless loop: jump to the equivalent real image on left side
         const realEquivalent = originalStartIndex + ((currentIndex - originalStartIndex) % originalImages.length);
         jumpSilently(realEquivalent);
         nextIdx = realEquivalent + 1;
       }
-      if (nextIdx < totalItems) {
-        moveToIndex(nextIdx, true);
-      } else {
-        // if beyond end, wrap to start of real set
-        jumpSilently(originalStartIndex);
-        moveToIndex(originalStartIndex + 1, true);
-      }
+      if (nextIdx < totalItems) moveToIndex(nextIdx, true);
+      else { jumpSilently(originalStartIndex); moveToIndex(originalStartIndex + 1, true); }
       updateActiveDot();
     }
     
-    // Update navigation dots based on which real image is currently visible
     function updateActiveDot() {
       if (!dotsContainer) return;
       let realIndex = ((currentIndex - originalStartIndex) % originalImages.length + originalImages.length) % originalImages.length;
       const dots = dotsContainer.querySelectorAll('.dot');
-      dots.forEach((dot, idx) => {
-        if (idx === realIndex) dot.classList.add('active-dot');
-        else dot.classList.remove('active-dot');
-      });
+      dots.forEach((dot, idx) => idx === realIndex ? dot.classList.add('active-dot') : dot.classList.remove('active-dot'));
     }
     
-    // Auto slide interval (ulit ulit)
     function startAutoSlide() {
       if (autoInterval) clearInterval(autoInterval);
       if (isHovering) return;
-      autoInterval = setInterval(() => {
-        if (!isHovering && !isTransitioning) {
-          nextSlide();
-        }
-      }, 2800);
+      autoInterval = setInterval(() => { if (!isHovering && !isTransitioning) nextSlide(); }, 2800);
     }
+    function stopAutoSlide() { if (autoInterval) { clearInterval(autoInterval); autoInterval = null; } }
     
-    function stopAutoSlide() {
-      if (autoInterval) {
-        clearInterval(autoInterval);
-        autoInterval = null;
-      }
-    }
-    
-    // Create navigation dots (based on original images)
     function createDots() {
       if (!dotsContainer) return;
       dotsContainer.innerHTML = '';
@@ -1012,9 +1006,7 @@ h3 i { font-size: 20px; }
           e.stopPropagation();
           if (isTransitioning) return;
           stopAutoSlide();
-          // map real index to current clone region index
           let targetVirtual = originalStartIndex + idx;
-          // ensure it stays within bounds
           if (targetVirtual >= totalItems) targetVirtual = originalStartIndex + idx - originalImages.length;
           if (targetVirtual < 0) targetVirtual = originalStartIndex + idx;
           moveToIndex(targetVirtual, true);
@@ -1024,20 +1016,12 @@ h3 i { font-size: 20px; }
       });
     }
     
-    // Hover pause/resume
     const wrapper = document.getElementById('carouselWrapper');
     if (wrapper) {
-      wrapper.addEventListener('mouseenter', () => {
-        isHovering = true;
-        stopAutoSlide();
-      });
-      wrapper.addEventListener('mouseleave', () => {
-        isHovering = false;
-        startAutoSlide();
-      });
+      wrapper.addEventListener('mouseenter', () => { isHovering = true; stopAutoSlide(); });
+      wrapper.addEventListener('mouseleave', () => { isHovering = false; startAutoSlide(); });
     }
     
-    // Resize handler: recalc positions
     function handleResize() {
       if (!track) return;
       stopAutoSlide();
@@ -1050,32 +1034,26 @@ h3 i { font-size: 20px; }
       startAutoSlide();
     }
     
-    // Initialize everything
     buildTrack();
     createDots();
     startAutoSlide();
-    window.addEventListener('resize', () => handleResize());
+    window.addEventListener('resize', handleResize);
   })();
 
-  // ========== MODAL ==========
+  // MODAL LOGIC
   const modal = document.getElementById('certModal');
   const modalImg = document.getElementById('certificateModalImg');
   const certCyberCard = document.getElementById('certCyberCard');
   const closeModalBtn = document.getElementById('closeModalBtn');
   function openCertificateModal(imageSrc = 'images/certificate-cyber.jpg') {
-    if (modal && modalImg) {
-      modalImg.src = imageSrc;
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
+    if (modal && modalImg) { modalImg.src = imageSrc; modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
   }
   function closeModalFunc() { if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } }
   if (certCyberCard) certCyberCard.addEventListener('click', (e) => { e.stopPropagation(); openCertificateModal('images/certificate-cyber.jpg'); });
   if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalFunc);
   if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
-  window.addEventListener('DOMContentLoaded', () => { if (modal) modal.style.display = 'none'; });
   
-  // ========== DARK MODE with image swap ==========
+  // DARK MODE + image swap
   const toggleCheckbox = document.getElementById('dark-mode-toggle');
   const rootElem = document.documentElement;
   const baseProfile = document.querySelector('.profile-pic.base');
@@ -1098,7 +1076,7 @@ h3 i { font-size: 20px; }
   if (initialDark) { toggleCheckbox.checked = true; setTheme(true); } else { setTheme(false); }
   toggleCheckbox.addEventListener('change', (e) => setTheme(e.target.checked));
   
-  // ========== CHATBOT ==========
+  // CHATBOT
   const chatContainer = document.getElementById('chatbot-container');
   const toggleBtn = document.getElementById('toggle-btn');
   const closeChat = document.getElementById('close-chat');
@@ -1125,9 +1103,9 @@ h3 i { font-size: 20px; }
   function botReply(userMsg) {
     const lowerMsg = userMsg.toLowerCase();
     if (lowerMsg.includes('tech') || lowerMsg.includes('stack')) return "I work with HTML, CSS, JS, PHP, Laravel, MySQL and Figma! 🚀";
-    if (lowerMsg.includes('project')) return "Recent projects: admin dashboard, e‑commerce UI, blog CMS. Check them in my portfolio!";
+    if (lowerMsg.includes('project')) return "Recent projects: admin dashboard, e‑commerce UI, blog CMS, Apartment Tracking System. Check them in my portfolio!";
     if (lowerMsg.includes('certificate') || lowerMsg.includes('cert')) return "I have certificates in Web Dev fundamentals, UI/UX, and Cybersecurity Seminar. Click the certificate card to view!";
-    if (lowerMsg.includes('experience') || lowerMsg.includes('journey')) return "Started coding in 2023, now focusing on frontend and full‑stack. Active in freelance & student projects.";
+    if (lowerMsg.includes('experience') || lowerMsg.includes('journey')) return "Started coding in 2023, now focusing on frontend and full‑stack. Active in freelance & student projects. I also have an upcoming internship this 2025!";
     if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) return "Hey there! Ask me anything about web dev or my journey. 🙌";
     return "Interesting! I'm still learning, but feel free to ask about my tech stack, certificates, or projects! 😊";
   }
@@ -1145,5 +1123,5 @@ h3 i { font-size: 20px; }
   closeChat.addEventListener('click', () => { chatContainer.classList.remove('active'); });
   updateCharCount();
 </script>
-</body>
+</body> 
 </html>
