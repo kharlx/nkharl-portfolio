@@ -118,6 +118,15 @@ toggle.addEventListener("change", () => {
   }
 });
 
+function openModal() {
+  document.getElementById("certModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("certModal").style.display = "none";
+}
+
+
 
 
 
