@@ -419,8 +419,8 @@ h3 i { font-size: 18px; }
 <div class="chat-toggle" id="toggle-btn"><i class="fas fa-comment-dots" style="font-size: 16px;"></i><strong>Chat with Kharl</strong></div>
 <div id="chatbot-container">
   <div class="chat-header"><div class="chat-header-left"><div class="avatar-wrapper"><img src="images/PROFILE PIC.png" alt="Kharl"></div><div class="header-text"><b>Kharl</b><span><span class="status-dot-inline"></span> Online</span></div></div><div class="close-btn" id="close-chat" style="cursor:pointer; font-size:18px;">✕</div></div>
-  <div class="chat-body" id="chatBody"><div class="message-row"><img src="images/PROFILE PIC.png" class="bot-img-small"><div class="bot-bubble">👋 Hi! I'm Kharl's AI assistant. Ask me anything — about Kharl, his school, year level, age, certificates, tech stack, projects, etc. I'm here to help!</div></div></div>
-  <div class="chat-footer"><div class="input-container"><input type="text" id="chat-input" placeholder="Type your message..." maxlength="1000"><button class="send-btn" id="sendMsgBtn">➔</button></div><div class="footer-hint"><span>💡 Ask: "who is Kharl?", "saan nag-aaral?", "ilang taon?", "tech stack", etc.</span><span id="char-count">0/1000</span></div></div>
+  <div class="chat-body" id="chatBody"><div class="message-row"><img src="images/PROFILE PIC.png" class="bot-img-small"><div class="bot-bubble">👋 Hi! I'm Kharl's AI assistant. Ask me anything — I'm here to help!</div></div></div>
+  <div class="chat-footer"><div class="input-container"><input type="text" id="chat-input" placeholder="Type your message..." maxlength="1000"><button class="send-btn" id="sendMsgBtn">➔</button></div><div class="footer-hint"><span></span><span id="char-count">0/1000</span></div></div>
 </div>
 
 <script>
@@ -663,7 +663,7 @@ function getSmartResponse(userMsg) {
   
   // Greetings
   if (msg.match(/\b(hi|hello|hey|good morning|good afternoon|kamusta|musta|kumusta)\b/)) {
-    return "👋 Hello! I'm Kharl's AI assistant. Kharl is a BSIT student passionate about web development. What would you like to know?";
+    return "👋 Hello! I'm Kharl. Kharl is a BSIT student passionate about web development. What would you like to know?";
   }
   
   // Who is Kharl / introduce yourself
@@ -678,7 +678,7 @@ function getSmartResponse(userMsg) {
   
   // Year level
   if (msg.includes('year') || msg.includes('yr') || msg.includes('what year') || msg.includes('ano year') || msg.includes('grade')) {
-    return "📚 Kharl is currently in his **2nd year** of college (BSIT), but based on credits he's also doing 3rd year level projects. He started his degree in 2023.";
+    return "📚 Kharl is currently in his **3nd year** of college (BSIT), but based on credits he's also doing 3rd year level projects. He started his degree in 2023.";
   }
   
   // Age
